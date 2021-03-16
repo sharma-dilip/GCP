@@ -1,7 +1,7 @@
 steps:
 #  - name: 'gcr.io/cloud-builders/npm'  
 #    args: ['install']
-  - name: 'gcr.io/$PROJECT_ID/npm:latest'
+  - name: 'gcr.io/cloud-builders/npm:latest'
     args: ['--version']
   - name: 'gcr.io/cloud-builders/npm:latest'  
     args: ['test']
