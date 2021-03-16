@@ -18,3 +18,13 @@ steps:
     env: 
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a' 
       - 'CLOUDSDK_CONTAINER_CLUSTER=gke-demo-cluster'
+  - name: 'gcr.io/cloud-builders/kubectl' 
+    args: 
+      - 'expose' 
+      - 'deployment' 
+      - 'my-nodejs-deployment' 
+      - '--port=80'
+      - '--target-port=6060'
+    env: 
+      - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a' 
+      - 'CLOUDSDK_CONTAINER_CLUSTER=gke-demo-cluster'
