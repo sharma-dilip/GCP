@@ -22,7 +22,8 @@ steps:
     args: 
       - 'expose' 
       - 'deployment' 
-      - 'my-nodejs-deployment' 
+      - 'my-nodejs-deployment'
+      - '--type=LoadBalancer'
       - '--port=80'
       - '--target-port=6060'
     env: 
