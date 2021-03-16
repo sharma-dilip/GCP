@@ -11,10 +11,11 @@ steps:
     args: ["push", "gcr.io/$PROJECT_ID/my-image:$REVISION_ID"]
   - name: 'gcr.io/cloud-builders/kubectl' 
     args: 
-      - 'set' 
-      - 'image' 
-      - 'deployment/my-nodejs-deployment' 
-      - 'my-container=gcr.io/$PROJECT_ID/my-image:$REVISION_ID' 
+      - 'create' 
+      - 'deployment' 
+      - 'my-nodejs-deployment' 
+      - '--image=gcr.io/$PROJECT_ID/my-image:$REVISION_ID'
+      - '--replicas=2'
     env: 
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a' 
       - 'CLOUDSDK_CONTAINER_CLUSTER=gke-demo-cluster'
