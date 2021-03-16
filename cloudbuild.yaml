@@ -14,7 +14,7 @@ steps:
       - 'set' 
       - 'image' 
       - 'deployment/my-nodejs-deployment' 
-      - 'my-container=gcr.io/$PROJECT_ID/my-image:$REVISION_ID'
+      - 'my-image=gcr.io/$PROJECT_ID/my-image:$REVISION_ID'
     env: 
       - 'CLOUDSDK_COMPUTE_ZONE=europe-west2-a' 
       - 'CLOUDSDK_CONTAINER_CLUSTER=gke-demo-cluster'
