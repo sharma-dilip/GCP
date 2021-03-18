@@ -18,7 +18,7 @@ steps:
     args:
      - '-c'
      - |
-       git clone git@github.com:sharma-dilip/GCP-EnvironmentRepo.git  && \
+       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
        cd GCP-EnvironmentRepo && \
        git checkout test-branch
 #      git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
