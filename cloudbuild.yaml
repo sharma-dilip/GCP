@@ -37,12 +37,12 @@ steps:
     args:
     - '-c'
     - |
+      git config --global user.email "sha.dilip87@gmail.com"
+      git config --global user.name "sharma-dilip"
       set -x && \
       cd GCP-EnvironmentRepo && \
       git add kubernetes.yaml && \
       git commit -m "Deploying image gcr.io/${PROJECT_ID}/my-image:${REVISION_ID}" && \
       Built from commit ${REVISION_ID} of repository GCP-EnvironmentRepo && \
-      git config --global user.email "sha.dilip87@gmail.com"
-      git config --global user.name "sharma-dilip"
       git push origin test-branch
       
