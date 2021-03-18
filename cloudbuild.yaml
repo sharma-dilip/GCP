@@ -41,6 +41,6 @@ steps:
       cd GCP-EnvironmentRepo && \
       git add kubernetes.yaml && \
       git commit -m "Deploying image gcr.io/${PROJECT_ID}/my-image:${REVISION_ID}
-#      Built from commit ${REVISION_ID} of repository GCP-EnvironmentRepo
+      Built from commit ${REVISION_ID} of repository GCP-EnvironmentRepo && \
 #      Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
       git push origin test-branch
