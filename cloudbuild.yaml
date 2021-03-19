@@ -45,6 +45,7 @@ steps:
       set -x && \
       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
       cd GCP-EnvironmentRepo && \
+      git checkout test-branch && \
       sed -i "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
       sed -i "s/COMMIT_SHA/${REVISION_ID}/g" > kubernetes.yaml
       git add kubernetes.yaml && \
