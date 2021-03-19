@@ -29,6 +29,7 @@ steps:
      - '-c'
      - |
        git branch --show-current
+       git fetch origin
        sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
        sed "s/COMMIT_SHA/${REVISION_ID}/g" > GCP-EnvironmentRepo/kubernetes.yaml
 # This step pushes the manifest back to GCP-EnvironmentRepo
