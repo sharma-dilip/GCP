@@ -46,9 +46,8 @@ steps:
       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
       cd GCP-EnvironmentRepo && \
       git checkout test-branch && \
-      git remote -v && \
-      sed -i "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
-      sed -i "s/COMMIT_SHA/${REVISION_ID}/g" > kubernetes.yaml.tpl
+      sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
+      sed "s/COMMIT_SHA/${REVISION_ID}/g" > GCP-EnvironmentRepo/kubernetes.yaml
       git add kubernetes.yaml.tpl && \
       git commit -m "Deploying image gcr.io/${PROJECT_ID}/my-image:${REVISION_ID}" && \
       git remote set-url origin https://sharma-dilip:Rajasthan%401987@github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
