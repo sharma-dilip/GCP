@@ -1,14 +1,26 @@
 #Start : This will build the image and push it to container registry.
 steps:
+#  - name: 'gcr.io/cloud-builders/npm'  
+#    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm:latest'
+    args: ['--version']
+  - name: 'gcr.io/cloud-builders/npm:latest'  
+    args: ['test']
+  - name: 'gcr.io/cloud-builders/docker'  
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/my-image:$REVISION_ID", "."]
+  - name: 'gcr.io/cloud-builders/docker'  
+    args: ["push", "gcr.io/$PROJECT_ID/my-image:$REVISION_ID"]
+#End : This will build the image and push it to container registry.
+#This will clone the environment repository
   - name: 'gcr.io/cloud-builders/gcloud'
     id: Clone Env repository
     entrypoint: /bin/sh
     args:
      - '-c'
      - |
-       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
-       cd GCP-EnvironmentRepo && \
-       git checkout test-branch
+#       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
+#       cd GCP-EnvironmentRepo && \
+#       git checkout test-branch
 # This step generates the new manifest
   - name: 'gcr.io/cloud-builders/gcloud'
     id: Generate kubernetes manifest
@@ -16,6 +28,24 @@ steps:
     args:
      - '-c'
      - |
-       git remote -v
+       git clone https://github.com/sharma-dilip/GCP-EnvironmentRepo.git && \
+       cd GCP-EnvironmentRepo && \
+       git checkout test-branch && \
        sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
        sed "s/COMMIT_SHA/${REVISION_ID}/g" > GCP-EnvironmentRepo/kubernetes.yaml
+# This step pushes the manifest back to GCP-EnvironmentRepo
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: Push manifest
+    entrypoint: /bin/sh
+    args:
+    - '-c'
+    - |
+      git config --global user.email "sha.dilip87@gmail.com"
+      git config --global user.name "sharma-dilip"
+      set -x && \
+      cd GCP-EnvironmentRepo && \
+      git add kubernetes.yaml && \
+      git commit -m "Deploying image gcr.io/${PROJECT_ID}/my-image:${REVISION_ID}" && \
+      Built from commit ${REVISION_ID} of repository GCP-EnvironmentRepo && \
+      git push origin test-branch
+      
